@@ -21,11 +21,14 @@
 		    padding: 20px;
 		    /* border-radius: 5px 5px; */
 		}
+		.titlerow{
+		    justify-content: center;
+		}
     	.tasklist,.taskform, .msg{
     		width: 100%;	
     	}
     	.newtaskinput{
-    		width: 94.6% !important;
+    		width: 94.3% !important;
     		margin-right: 5px !important;
     	}
     	.taskformrow{
@@ -43,10 +46,13 @@
   </head>
 <body ng-app="mainApp" ng-cloak ng-controller="mainAppController">
 	<div class="container">
+		<div class="row titlerow">
+			<h3>GToDo</h3>
+		</div>
 		<div class="row taskformrow">
 			<form class="form-inline taskform">
-				<input type="text" name="task" placeholder="Add new task here" class="form-control newtaskinput" ng-model="tasktoadd">
-				<button type="submit" class="btn btn-primary" ng-click="addTask()">Add</button>	
+				<input type="text" name="task" placeholder="Add new task here and press (Enter) or click ADD button" class="form-control newtaskinput" ng-model="tasktoadd">
+				<button type="submit" class="btn btn-primary" ng-click="addTask()">ADD</button>	
 			</form>		
 		</div>
 		<div class="row" ng-show="errormsg">
@@ -76,7 +82,7 @@
 
 		var app=angular.module("mainApp",[]);
 		app.controller("mainAppController",function($scope){
-			$scope.tasks=["Task1","Task2"];
+			$scope.tasks=["Sample Task #1","Sample Task #2"];
 			$scope.addTask=function(){
 				// alert("called");
 				$scope.errormsg="";
