@@ -14,20 +14,92 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/custom.css" rel="stylesheet">
-
+    <link href="dist/css/custom.css" rel="stylesheet">
+    <style type="text/css">
+    	.container {
+		    background-color: #eef0f3;
+		    padding: 20px;
+		    /* border-radius: 5px 5px; */
+		}
+    	.tasklist,.taskform, .msg{
+    		width: 100%;	
+    	}
+    	.newtaskinput{
+    		width: 94.6% !important;
+    		margin-right: 5px !important;
+    	}
+    	.taskformrow{
+    		margin-top: 5px;
+    		margin-bottom: 5px;
+    	}
+    	.list-group-item{
+    		padding: .25rem 0.70rem;	
+    	}
+    </style>
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/angular.min.js"></script>
   </head>
-<body>
+<body ng-app="mainApp" ng-cloak ng-controller="mainAppController">
 	<div class="container">
-		<ul class="list-group">
-		  <li class="list-group-item">Cras justo odio</li>
-		  <li class="list-group-item">Dapibus ac facilisis in</li>
-		  <li class="list-group-item">Morbi leo risus</li>
-		  <li class="list-group-item">Porta ac consectetur ac</li>
-		  <li class="list-group-item">Vestibulum at eros</li>
-		</ul>	
+		<div class="row taskformrow">
+			<form class="form-inline taskform">
+				<input type="text" name="task" placeholder="Add new task here" class="form-control newtaskinput" ng-model="tasktoadd">
+				<button type="submit" class="btn btn-primary" ng-click="addTask()">Add</button>	
+			</form>		
+		</div>
+		<div class="row" ng-show="errormsg">
+			<div class="alert alert-warning msg" role="alert">
+			  {{errormsg}}
+			</div>
+			<!-- <div class="alert alert-warning alert-dismissible" role="alert">
+				{{errormsg}}
+			  	<span type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  		<span aria-hidden="true">&times;</span>
+			  	</span>
+			</div> -->
+		</div>
+		<div class="row">
+			<ul class="list-group tasklist">
+			  <li class="list-group-item" ng-repeat="task in tasks  | orderBy:'$index':true"">{{task}}<button class="btn btn-danger float-right" ng-click="removeTask($index)">X</button></li>
+			</ul>			
+		</div>
+		
+	
 	</div>
+	<script type="text/javascript">
+		// $(".alert").click(function(){
+		// 	// $(this).hide();
+		// });
+		// $(".alert").alert();	
+
+		var app=angular.module("mainApp",[]);
+		app.controller("mainAppController",function($scope){
+			$scope.tasks=["Task1","Task2"];
+			$scope.addTask=function(){
+				// alert("called");
+				$scope.errormsg="";
+
+				// Check if task is empty
+				if(!$scope.tasktoadd){
+					// alert("empty");
+					return;
+				}
+
+				// Check if task is already there
+				if($scope.tasks.indexOf($scope.tasktoadd)==-1){
+					$scope.tasks.push($scope.tasktoadd);
+					// alert("added");
+				}else{
+					$scope.errormsg="Duplicate task!";
+				}
+			};
+			$scope.removeTask=function(index){
+				$scope.errormsg="";
+				$scope.tasks.splice(index,1);
+			};
+		});
+	</script>
 </body>
 </html>
