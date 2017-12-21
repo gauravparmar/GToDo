@@ -28,7 +28,7 @@
     		width: 100%;	
     	}
     	.newtaskinput{
-    		width: 94.3% !important;
+    		width: 100% !important;
     		margin-right: 5px !important;
     	}
     	.taskformrow{
@@ -51,8 +51,8 @@
 		</div>
 		<div class="row taskformrow">
 			<form class="form-inline taskform">
-				<input type="text" name="task" placeholder="Add new task here and press (Enter) or click ADD button" class="form-control newtaskinput" ng-model="tasktoadd">
-				<button type="submit" class="btn btn-primary" ng-click="addTask()">ADD</button>	
+				<input type="text" name="task" placeholder="Type a new task here and press (Enter)" class="form-control newtaskinput" ng-model="tasktoadd" ng-click="addTask()">
+				<button type="submit" class="btn btn-primary" ng-click="addTask()" hidden="true">ADD</button>	
 			</form>		
 		</div>
 		<div class="row" ng-show="errormsg">
