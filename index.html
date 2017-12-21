@@ -96,6 +96,7 @@
 				// Check if task is already there
 				if($scope.tasks.indexOf($scope.tasktoadd)==-1){
 					$scope.tasks.push($scope.tasktoadd);
+					$scope.tasktoadd='';
 					// alert("added");
 				}else{
 					$scope.errormsg="Duplicate task!";
